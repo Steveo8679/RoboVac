@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VacBrush : MonoBehaviour
 {
+    float brushSpeed = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,6 @@ public class VacBrush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0,1,0);
+        transform.Rotate(0, brushSpeed ,0);
     }
 }
