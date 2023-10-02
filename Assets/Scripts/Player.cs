@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -8,10 +9,29 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private float Speed = 0.6f;
 
-    // Update is called once per frame
+    // Define an event delegate for player movement
+    public static event Action OnPlayerMove;
+    public static event Action OnPlayerStop; 
+
     void Update()
     {
-        PlayerMovementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
+        // Get player input for movement
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Create a normalized movement vector
+        PlayerMovementInput = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+
+        // Check for player movement and trigger events
+        if (PlayerMovementInput.magnitude > 0.1f)
+        {
+            OnPlayerMove?.Invoke();
+        }
+        else
+        {
+            OnPlayerStop?.Invoke();
+        }
+
         MovePlayer();
         
     }

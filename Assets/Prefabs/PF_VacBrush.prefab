@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 1501476166881580004}
   - component: {fileID: 3010325439762213389}
   m_Layer: 0
-  m_Name: Brush
+  m_Name: PF_VacBrush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

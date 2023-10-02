@@ -1,19 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VacBrush : MonoBehaviour
 {
-    float brushSpeed = 5.0f;
-    // Start is called before the first frame update
+    private float brushSpeed = 5.0f;
+
+    // Flag to track whether the player is currently moving
+    private bool isPlayerMoving = false;
+
     void Start()
     {
-        
+        // Subscribe to the OnPlayerMove event
+        Player.OnPlayerMove += () => isPlayerMoving = true;
+        Player.OnPlayerStop += () => isPlayerMoving = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, brushSpeed ,0);
+        // Rotate the brushes if moving.
+        if (isPlayerMoving)
+        {
+            transform.Rotate(0, brushSpeed, 0);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe to the OnPlayerMove event
+        Player.OnPlayerMove -= () => isPlayerMoving = true;
+        Player.OnPlayerStop -= () => isPlayerMoving = false;
     }
 }
