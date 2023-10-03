@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody PlayerBody;
     [Space]
     [SerializeField] private float Speed = 0.6f;
+    [SerializeField] private float rotationSpeed = 120f;
 
     // Define an event delegate for player movement
     public static event Action OnPlayerMove;
@@ -38,9 +39,19 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 MoveVector = transform.TransformDirection(PlayerMovementInput) * Speed;
-        PlayerBody.velocity = new Vector3(MoveVector.x, PlayerBody.velocity.y, MoveVector.z);
+        //Vector3 MoveVector = transform.TransformDirection(PlayerMovementInput) * Speed;
+        //PlayerBody.velocity = new Vector3(MoveVector.x, PlayerBody.velocity.y, MoveVector.z);
 
+
+
+        // Rotate the character based on keyboard input
+        float rotationInput = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
+        transform.Rotate(Vector3.up * rotationInput);
+
+        // Move the character based on keyboard input
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = transform.forward * verticalInput;
+        PlayerBody.velocity = new Vector3(moveDirection.x, PlayerBody.velocity.y, moveDirection.z) * Speed;
     }
 
 }
