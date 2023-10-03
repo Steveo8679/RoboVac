@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VacBrush : MonoBehaviour
 {
-    private float brushSpeed = 5.0f;
+    private float brushSpeed = 40f; //Degrees
 
     // Flag to track whether the player is currently moving
     private bool isPlayerMoving = false;
@@ -14,7 +14,7 @@ public class VacBrush : MonoBehaviour
         Player.OnPlayerStop += () => isPlayerMoving = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Rotate the brushes if moving.
         if (isPlayerMoving)
