@@ -10,8 +10,8 @@ public class VacBrush : MonoBehaviour
     void Start()
     {
         // Subscribe to the OnPlayerMove event
-        Player.OnPlayerMove += () => isPlayerMoving = true;
-        Player.OnPlayerStop += () => isPlayerMoving = false;
+        PlayerMovement.OnPlayerMove += () => isPlayerMoving = true;
+        PlayerMovement.OnPlayerStop += () => isPlayerMoving = false;
     }
 
     void FixedUpdate()
@@ -26,7 +26,7 @@ public class VacBrush : MonoBehaviour
     private void OnDestroy()
     {
         // Unsubscribe to the OnPlayerMove event
-        Player.OnPlayerMove -= () => isPlayerMoving = true;
-        Player.OnPlayerStop -= () => isPlayerMoving = false;
+        PlayerMovement.OnPlayerMove -= () => isPlayerMoving = true;
+        PlayerMovement.OnPlayerStop -= () => isPlayerMoving = false;
     }
 }

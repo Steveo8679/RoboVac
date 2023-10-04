@@ -1,18 +1,19 @@
 using UnityEngine;
 using System;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    private Vector3 PlayerMovementInput;
 
     [SerializeField] private Rigidbody PlayerBody;
     [Space]
     [SerializeField] private float Speed = 0.6f;
     [SerializeField] private float rotationSpeed = 120f;
 
+    private Vector3 PlayerMovementInput;
+
     // Define an event delegate for player movement
     public static event Action OnPlayerMove;
-    public static event Action OnPlayerStop; 
+    public static event Action OnPlayerStop;
 
     void Update()
     {
@@ -39,11 +40,6 @@ public class Player : MonoBehaviour
 
     private void MovePlayer()
     {
-        //Vector3 MoveVector = transform.TransformDirection(PlayerMovementInput) * Speed;
-        //PlayerBody.velocity = new Vector3(MoveVector.x, PlayerBody.velocity.y, MoveVector.z);
-
-
-
         // Rotate the character based on keyboard input
         float rotationInput = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up * rotationInput);
